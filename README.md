@@ -1,4 +1,3 @@
-![Itachi-HD-Backgrounds](https://github.com/user-attachments/assets/43a9e8c2-9627-4e50-ab7c-cd9e5338d308)## Prototype Development for Image Captioning Using the BLIP Model and Gradio Framework
 
 ### AIM:
 To design and deploy a prototype application for image captioning by utilizing the BLIP image-captioning model and integrating it with the Gradio UI framework for user interaction and evaluation.
@@ -31,6 +30,7 @@ import base64
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv()) # read local .env file
 hf_api_key = os.environ['HF_API_KEY']
+
 # Helper functions
 import requests, json
 
@@ -48,6 +48,13 @@ def get_completion(inputs, parameters=None, ENDPOINT_URL=os.environ['HF_API_ITT_
                                 headers=headers,
                                 data=json.dumps(data))
     return json.loads(response.content.decode("utf-8"))
+
+
+
+image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
+display(IPython.display.Image(url=image_url))
+get_completion(image_url)
+
 import gradio as gr 
 
 def image_to_base64_str(pil_image):
@@ -68,16 +75,12 @@ demo = gr.Interface(fn=captioner,
                     title="Image Captioning with BLIP",
                     description="Caption any image using the BLIP model",
                     allow_flagging="never",
-                    examples=["messi wp.jpeg", "Messi.jpeg", "anime.jpeg"])
+                    examples=["anime.jpg", "Messi.jpg", "messi wp.jpg"])
 
-demo.launch(share=True, server_port=int(os.environ['PORT1']))
-#run this to end server
-gr.close_all()
+demo.launch()
 ```
-
 ### OUTPUT:
-<img width="1150" height="643" alt="Screenshot 2025-11-14 114909" src="https://github.com/user-attachments/assets/dac7a68b-3fa0-452d-b78c-2696ff4c0e37" />
-
+<img width="1052" height="664" alt="Screenshot 2025-11-20 105603" src="https://github.com/user-attachments/assets/a87fc6d7-2362-47b2-90ee-3bbbf9e48c15" />
 
 ### RESULT:
 The prototype application for image captioning was successfully designed and deployed using the BLIP model integrated with the Gradio UI. The system effectively generates relevant captions for uploaded images and provides a user-friendly interface for interaction and evaluation.
